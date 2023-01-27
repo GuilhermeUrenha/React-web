@@ -6,29 +6,41 @@ import { Transition } from 'react-transition-group';
 
 function App() {
 	const [inProp, setInProp] = useState(false);
-	var name = ['G','U','I','L','H','E','R','M','E'];
-	var assembleDelay = 500;
-	var extension = ['.','r','a','r']
-	var typeDelay = 0;
 
 	useEffect (()=>{
 		setInProp(true);
 	}, []);
 	
+	var assembleDelay = 500;
 	function nameAssemble(letter){
+		const startingPoint = Math.floor(Math.random() * 2);
+		const topStart = 0, bottomStart = 1;
+		var startPosition;
+
+		if(startingPoint === topStart)
+			startPosition = '-15vh';
+		else if(startingPoint === bottomStart)
+			startPosition = '100vh';
+
 		const assembleTransition = {
-			entering: { marginTop: '-15vh' },
-			entered: { marginTop: '15vh' }
+			entering: { 
+				marginTop: startPosition
+			},
+			entered: { 
+				marginTop: '15vh',
+				opacity: 1 
+			}
 		};
-		//var position;
+
 		return (<Transition in={inProp} timeout={assembleDelay+=100}>
 			{(state) =>(
 				<div
-					className='NameLetter'
-					style={{
-						transition: `margin-top 500ms`,
-						...assembleTransition[state]
-					}}
+				className='NameLetter'
+				style={{
+					marginTop: startPosition,
+					transition: `margin-top 500ms ease-out`,
+					...assembleTransition[state]
+				}}
 				>
 				{letter}
 				</div>
@@ -36,26 +48,29 @@ function App() {
 		</Transition>);
 	}
 
+	var typeDelay = 100;
 	function extensionType(letter){
 		const typeTransition = {
-			entering: { opacity: 0 },
+			//entering: { },
 			entered: { opacity: 1 }
 		};
 		return (<Transition in={inProp} timeout={typeDelay+=300}>
 			{(state) =>(
 				<div
-					className='NameLetter NameExtension'
-					style={{
-						transition: `opacity 100ms ease-in-out`,
-						opacity: 0,
-						...typeTransition[state]
-					}}
+				className='NameLetter NameExtension'
+				style={{
+					transition: `opacity 100ms ease-out`,
+					...typeTransition[state]
+				}}
 				>
 				{letter}	
 				</div>
 			)}
 		</Transition>);
 	}
+	
+	var name = ['G','U','I','L','H','E','R','M','E'];
+	var extension = ['.','r','a','r'];
 
 	return (
 		<div className='App'>
