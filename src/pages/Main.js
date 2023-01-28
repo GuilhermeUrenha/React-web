@@ -8,7 +8,7 @@ export default function Resume () {
 		setInProp(true);
 	}, []);
 
-    var assembleDelay = 1000;
+    var assembleDelay = 400;
 	function nameAssemble(letter){
 		const startingPoint = Math.floor(Math.random() * 2);
 		const topStart = 0, bottomStart = 1;
@@ -88,10 +88,10 @@ export default function Resume () {
 	var name = ['G','U','I','L','H','E','R','M','E'];
 	var extension = ['.','r','a','r'];
 
-  return (
-    <div id='Name'>
-        {name.map((letter) => nameAssemble(letter))}
-        {extension.map((letter) => extensionType(letter))}
-    </div>
-  );
+  	return (
+		<div id='Name'>
+			{name.map((letter) => nameAssemble(letter))}
+			{extension.map((letter) => extensionType(letter))}
+		</div>
+	);
 };

@@ -4,13 +4,12 @@ html {
 	background-color: rgb(24, 24, 24);
 }
 
-nav {
-	display: inline-flex;
+body::-webkit-scrollbar{
+	background: #1a1a1d;
 }
 
-a {
-	text-decoration: none;
-	color: aliceblue;
+body::-webkit-scrollbar-thumb{
+	background: #272729;
 }
 
 .App {
@@ -27,6 +26,28 @@ a {
 	font-size: calc(10px + 2vmin);
 	color: white;
 	z-index: 1;
+}
+
+
+.Link-routes {
+	height: 85%;
+	width: 60%;
+	align-items: center;
+	justify-content: center;
+	display: inline-flex;
+}
+
+.Link {
+	opacity: 0.6;
+	font-size: 5vh;
+	margin-inline: 4%;
+	text-decoration: none;
+	color: aliceblue;
+	transition: opacity 1s ease-out;
+}
+
+.Link.active {
+	opacity: 1;
 }
 
 #Name {
@@ -53,10 +74,48 @@ a {
 	padding-inline-start: 0vw;
 }
 
+.placeholder {
+	color: aliceblue;
+	position: absolute;
+	left: 10%;
+}
+
 #Curriculo {
-	display: none;
 	border: none;
-	width: -webkit-fill-available;
-	height: 100%;
-	margin-top: 20%;
+	width: 80%;
+	height: 125vmin;
+	margin-top: 8vh;
+}
+
+.underline::after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 2px;
+	transform: scaleX(0);
+	transform-origin: center;
+	background: aliceblue;
+	animation: underlineActive 1s ease-in-out forwards;
+}
+
+.underline.inactive::after {
+	animation: underlineInactive 1s ease-in-out forwards;
+}
+
+@keyframes underlineActive {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes underlineInactive {
+	from {
+		transform: scaleX(1);
+	}
+	to {
+		transform: scaleX(0);
+	}
 }
