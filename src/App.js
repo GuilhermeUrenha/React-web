@@ -39,6 +39,14 @@ function App() {
 					<Route path='/Resume' element={<Resume/>}/>
 				</Routes>
 			</BrowserRouter>
+			<div className={'sticky'}>
+				<a href='https://github.com/GuilhermeUrenha' target='_blank' rel='noreferrer'>
+					<img src={process.env.PUBLIC_URL + '/github.svg'} alt='Github'/>
+				</a>
+				<a href='https://www.linkedin.com/in/guilherme-vieira-urenha/' target='_blank' rel='noreferrer'>
+					<img src={process.env.PUBLIC_URL + '/linkedin.svg'} alt='Linkedin'/>
+				</a>
+			</div>
 		</div>
 	);
 }

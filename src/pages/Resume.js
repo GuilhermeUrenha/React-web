@@ -5,6 +5,7 @@ export default function Resume() {
 		const placeholder = document.getElementsByClassName('placeholder')[0];
 		placeholder.style.display = 'none';
     }
+	
 	return (
 		<div>
 			<p className='placeholder'>Carregando</p>

@@ -28,7 +28,6 @@ body::-webkit-scrollbar-thumb{
 	z-index: 1;
 }
 
-
 .Link-routes {
 	height: 85%;
 	width: 60%;
@@ -135,4 +134,23 @@ body::-webkit-scrollbar-thumb{
 	to {
 		transform: scaleX(0);
 	}
+}
+
+.sticky {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 9vh;
+	position: fixed;
+	cursor: pointer;
+	bottom: 1vh;
+	right: 1vw;
+	padding: .5vh;
+	border-radius: 5%;
+	background-color: aliceblue;
+}
+
+.sticky img {
+	display: list-item;
+	height: 4vh;
 }
