@@ -5,7 +5,7 @@ import Resume from './pages/Resume';
 
 function App() {
 	
-	function ToLink({ to, children }) {
+	const ToLink = ({ to, children }) => {
 		const location = useLocation();
 		const isActive = location.pathname === to;
 		return (
@@ -14,6 +14,7 @@ function App() {
 			</Link>
 		);
 	}
+
 	const links = document.querySelectorAll('.Link');
 	links.forEach(link => {
 		link.addEventListener('click', function() {
@@ -23,6 +24,7 @@ function App() {
 			this.classList.replace('inactive','active');
 		});
 	});
+
 	return (
 		<div className='App'>
 			<BrowserRouter>

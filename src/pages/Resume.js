@@ -7,7 +7,7 @@ export default function Resume() {
     }
 	return (
 		<div>
-			<p className='placeholder'>Carregando...</p>
+			<p className='placeholder'>Carregando</p>
 			<iframe
 				id='Curriculo'
 				title='Curriculo'
