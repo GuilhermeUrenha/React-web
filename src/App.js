@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import './App.css';
 import Main from './pages/Main';
 import Resume from './pages/Resume';
+/*import Projects from './pages/Projects';*/
 
 function App() {
-	
 	const ToLink = ({ to, children }) => {
 		const location = useLocation();
 		const isActive = location.pathname === to;
@@ -14,7 +14,6 @@ function App() {
 			</Link>
 		);
 	}
-
 	const links = document.querySelectorAll('.Link');
 	links.forEach(link => {
 		link.addEventListener('click', function() {
@@ -32,11 +31,13 @@ function App() {
 					<nav className='Link-routes'>
 						<ToLink to={'/'}>Home</ToLink>
 						<ToLink to={'/Resume'}>Currículo</ToLink>
+						{/*<ToLink to={'/Projects'}>Projetos</ToLink>*/}
 					</nav>
 				</header>
 				<Routes>
 					<Route path='/' element={<Main/>}/>
 					<Route path='/Resume' element={<Resume/>}/>
+					{/*<Route path='/Projects' element={<Projects/>}/>*/}
 				</Routes>
 			</BrowserRouter>
 			<div className={'sticky'}>

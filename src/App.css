@@ -2,6 +2,7 @@
 
 html {
 	background-color: rgb(24, 24, 24);
+    overflow-y: scroll;
 }
 
 body::-webkit-scrollbar{
@@ -51,20 +52,20 @@ body::-webkit-scrollbar-thumb{
 
 #Name {
 	position: relative;
-	display: flex;
+	/*display: flex;*/
 	justify-content: center;
 	width: 100%;
 	z-index: 0;
 }
 
 .NameLetter {
+	position: absolute;
 	opacity: 0;
-	display: inline;
-	padding-inline-start: 0.5vw;
+	/*display: inline;
+	padding-inline-start: 0.5vw;*/
 	font-family: 'Corbel', sans-serif;
 	font-size: 10vmin;
 	color: aliceblue;
-	z-index: 0;
 }
 
 .NameExtension {
