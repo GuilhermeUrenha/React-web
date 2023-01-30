@@ -51,26 +51,24 @@ body::-webkit-scrollbar-thumb{
 }
 
 #Name {
+	display: flex;
 	position: relative;
-	/*display: flex;*/
 	justify-content: center;
+	height: 100%;
 	width: 100%;
 	z-index: -1;
 }
 
 .NameLetter {
-	position: absolute;
 	opacity: 0;
-	/*display: inline;
-	padding-inline-start: 0.5vw;*/
+	display: inline;
+	padding-inline-start: 0.5vw;
 	font-family: 'Corbel', sans-serif;
-	font-size: 10vmin;
+	font-size: 6vw;
 	color: aliceblue;
 }
 
 .NameExtension {
-	opacity: 0;
-	margin-top: 15vh;
 	padding-inline-start: 0vw;
 }
 
