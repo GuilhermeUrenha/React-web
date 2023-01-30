@@ -26,22 +26,25 @@ export default function Resume() {
 //		return Math.max(vh(percent), vw(percent));
 //	}
 
-	//var index = -2;
+/*
+
+	use vh or whatever to translate to px and then add the lWidth to the variable
+
+*/
+	var index = -2;
 	var baseLeftMargin = 20;
 	var assembleDelay = 400;
 	function nameAssemble(letter) {
-		var assembleTransition, margin, transition;
+		var startPosition, assembleTransition, margin, transition;
 		const startingPoint = Math.floor(Math.random() * 2);
 		const topStart = 0, bottomStart = 1, leftStart = 2, rightStart = 3;
 		const marginDifference = 4.5;
-		var startPosition;
 
-		//var lttr = document.getElementsByClassName('NameLetter')[index+=1];
-		//var lWidth = lttr?.clientWidth || 0;
-		var lWidth = 0;
-		if (lWidth < vmin(20))
+		var lttr = document.getElementsByClassName('NameLetter')[index+=1];
+		var lWidth = lttr?.clientWidth || 0;
+		if (lWidth < vmin(10))
 			lWidth *= -1;
-
+		console.log(lWidth);
 		if (startingPoint === topStart) {
 			startPosition = '-15vh';
 			assembleTransition = {
@@ -119,12 +122,17 @@ export default function Resume() {
 	var extension = ['.', 'r', 'a', 'r'];
 
 	return (
-		<div id='Name'>
-			{
-				//name.map((letter) => nameAssemble(letter))
-				name.concat(extension).map((letter) => nameAssemble(letter))
-				//extension.map((letter) => nameAssemble(letter))
-			}
-		</div>
+		<main>
+			<div id='Name'>
+				{
+					//name.map((letter) => nameAssemble(letter))
+					name.concat(extension).map((letter) => nameAssemble(letter))
+					//extension.map((letter) => nameAssemble(letter))
+				}
+			</div>
+			<div>
+
+			</div>
+		</main>
 	);
 };

@@ -7,7 +7,7 @@ export default function Resume() {
     }
 	
 	return (
-		<div>
+		<main>
 			<p className='placeholder'>Carregando</p>
 			<iframe
 				id='Curriculo'
@@ -15,6 +15,6 @@ export default function Resume() {
 				onLoad={resumeLoad}
 				src="https://docs.google.com/document/d/1ufQMFRV_NppkyrA9i07sM7Tvml-DFMayGkmEjfvFClE/preview?pli=1"
 			/>
-		</div>
+		</main>
 	);
 };

@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Projects() {	
 	return (
-		<div>
+		<main>
             <iframe id='github' title='github' src='https://github.com/GuilhermeUrenha/Dusknoir'/>
-		</div>
+		</main>
 	);
 };
