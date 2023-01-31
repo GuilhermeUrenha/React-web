@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import './App.css';
 import Main from './pages/Main';
 import Resume from './pages/Resume';
-/*import Projects from './pages/Projects';*/
 
 function App() {
 	const ToLink = ({ to, children }) => {

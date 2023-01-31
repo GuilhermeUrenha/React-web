@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
+import Async from 'react-async';
 import { Octokit } from '@octokit/core';
 import token from '../auth.js';
 
@@ -18,11 +19,8 @@ export default function App() {
 		const octokit = new Octokit({
 			auth: token
 		});
-		var result = await octokit.request('GET /repos/GuilhermeUrenha/Carracosta', {
-			owner: 'GuilhermeUrenha',
-			repo: 'Carracosta'
-		});
-		console.log(result);
+		var result = await octokit.request('GET /users/GuilhermeUrenha/repos', {});
+		document.getElementById('section').textContent = JSON.stringify(result, null, 4);
 	}
 
 	var assembleDelay = 500;
@@ -68,6 +66,9 @@ export default function App() {
 				{name.map((letter) => nameAssemble(letter))}
 				{extension.map((letter) => nameAssemble(letter, true))}
 			</div>
+			<section id='section'>
+				{(()=>{return (<div>yes</div>)})()}
+			</section>
 		</main>
 	);
 };

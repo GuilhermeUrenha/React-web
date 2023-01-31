@@ -3,6 +3,7 @@
 html {
 	background-color: rgb(24, 24, 24);
     overflow-y: scroll;
+	color: aliceblue;
 }
 
 body::-webkit-scrollbar{
