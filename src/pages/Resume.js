@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function Resume() {
     function resumeLoad() {
-		const placeholder = document.getElementsByClassName('placeholder')[0];
+		const placeholder = document.getElementsByClassName('loading')[0];
 		placeholder.style.display = 'none';
     }
 	
 	return (
 		<main>
-			<p className='placeholder'>Carregando</p>
+			<p className='loading'>Carregando</p>
 			<iframe
 				id='Curriculo'
 				title='Curriculo'

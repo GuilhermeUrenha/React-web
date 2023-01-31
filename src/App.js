@@ -18,9 +18,9 @@ function App() {
 	links.forEach(link => {
 		link.addEventListener('click', function() {
 			links.forEach(li => {
-				li.classList.replace('active','inactive')
+				li.classList.add('inactive');
 			});
-			this.classList.replace('inactive','active');
+			this.classList.remove('inactive');
 		});
 	});
 
@@ -31,13 +31,11 @@ function App() {
 					<nav className='Link-routes'>
 						<ToLink to={'/'}>Home</ToLink>
 						<ToLink to={'/Resume'}>Currículo</ToLink>
-						{/*<ToLink to={'/Projects'}>Projetos</ToLink>*/}
 					</nav>
 				</header>
 				<Routes>
 					<Route path='/' element={<Main/>}/>
 					<Route path='/Resume' element={<Resume/>}/>
-					{/*<Route path='/Projects' element={<Projects/>}/>*/}
 				</Routes>
 			</BrowserRouter>
 			<div className={'sticky'}>

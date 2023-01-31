@@ -35,7 +35,6 @@ export default function App() {
 				className={`NameLetter ${extension ? 'NameExtension' : ''}`}
 				style={{
 					marginTop: startPosition,
-					transition: `margin-top 500ms ease-out`,
 					...assembleTransition[state]
 				}}
 				>
@@ -53,10 +52,6 @@ export default function App() {
 			<div id='Name'>
 				{name.map((letter) => nameAssemble(letter))}
 				{extension.map((letter) => nameAssemble(letter, true))}
-				{/*name.concat(extension).map((letter) => nameAssemble(letter))*/}
-			</div>
-			<div>
-
 			</div>
 		</main>
 	);

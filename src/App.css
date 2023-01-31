@@ -22,7 +22,7 @@ body::-webkit-scrollbar-thumb{
 .App-header {
 	background-color: #1a1a1d;
 	position: relative;
-	height: 15vh;
+	height: 9vmax;
 	width: 100%;
 	font-size: calc(10px + 2vmin);
 	color: white;
@@ -30,17 +30,17 @@ body::-webkit-scrollbar-thumb{
 }
 
 .Link-routes {
-	height: 85%;
+	height: 90%;
 	width: 60%;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
 	display: inline-flex;
 }
 
 .Link {
 	opacity: 0.6;
-	font-size: 5vh;
-	margin-inline: 4%;
+	font-size: 200%;
+	margin-inline: 6%;
 	text-decoration: none;
 	color: aliceblue;
 	transition: opacity 1s ease-out;
@@ -48,58 +48,6 @@ body::-webkit-scrollbar-thumb{
 
 .Link.active {
 	opacity: 1;
-}
-
-#Name {
-	display: flex;
-	position: relative;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-	z-index: -1;
-}
-
-.NameLetter {
-	opacity: 0;
-	display: inline;
-	padding-inline-start: 0.5vw;
-	font-family: 'Corbel', sans-serif;
-	font-size: 6vw;
-	color: aliceblue;
-}
-
-.NameExtension {
-	padding-inline-start: 0vw;
-}
-
-.placeholder {
-	color: aliceblue;
-	position: absolute;
-	left: 10%;
-}
-
-.placeholder::after {
-	content: '...';
-	animation: dots 2s infinite;
-}
-
-@keyframes dots {
-	0% {
-	  	content: '.';
-	}
-	33% {
-	  	content: '..';
-	}
-	66% {
-	  	content: '...';
-	}
-}
-
-#Curriculo {
-	border: none;
-	width: 80%;
-	height: 125vmin;
-	margin-top: 8vh;
 }
 
 .underline::after {
@@ -133,6 +81,54 @@ body::-webkit-scrollbar-thumb{
 	to {
 		transform: scaleX(0);
 	}
+}
+
+#Name {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+}
+
+.NameLetter {
+	opacity: 0;
+	display: inline;
+	font-family: 'Corbel', sans-serif;
+	font-size: 10vmin;
+	color: aliceblue;
+	transition: margin-top 500ms ease-out;
+}
+
+.loading {
+	color: aliceblue;
+	position: absolute;
+	left: 10%;
+}
+
+.loading::after {
+	content: '...';
+	animation: dots 2s infinite;
+}
+
+@keyframes dots {
+	0% {
+	  	content: '.';
+	}
+	33% {
+	  	content: '..';
+	}
+	66% {
+	  	content: '...';
+	}
+}
+
+#Curriculo {
+	border: none;
+	width: 80%;
+	height: 125vmin;
+	margin-top: 8vh;
 }
 
 .sticky {
