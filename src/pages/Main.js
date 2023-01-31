@@ -1,12 +1,29 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
+import { Octokit } from '@octokit/core';
+import token from '../auth.js';
 
 export default function App() {
 	const [inProp, setInProp] = useState(false);
 	useEffect(() => {
 		setInProp(true);
 	}, []);
+
+	useEffect(() => {
+		if(inProp) getGitHub();
+	}, [inProp])
+
+	async function getGitHub() {
+		const octokit = new Octokit({
+			auth: token
+		});
+		var result = await octokit.request('GET /repos/GuilhermeUrenha/Carracosta', {
+			owner: 'GuilhermeUrenha',
+			repo: 'Carracosta'
+		});
+		console.log(result);
+	}
 
 	var assembleDelay = 500;
 	function nameAssemble(letter, extension){
@@ -18,7 +35,6 @@ export default function App() {
 			startPosition = '-15vh';
 		else if(startingPoint === bottomStart)
 			startPosition = '60vh';
-
 		const assembleTransition = {
 			entering: { 
 				marginTop: startPosition
@@ -28,7 +44,6 @@ export default function App() {
 				opacity: 1
 			}
 		};
-
 		return (<Transition in={inProp} timeout={assembleDelay+=100}>
 			{(state) =>(
 				<div
