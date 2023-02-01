@@ -86,11 +86,12 @@ body::-webkit-scrollbar-thumb{
 
 #Name {
 	display: flex;
-	position: relative;
+	position: absolute;
 	justify-content: center;
-	height: 100%;
+	background: black;
+	height: 30vmax;
 	width: 100%;
-	z-index: 0;
+	z-index: -1;
 }
 
 .NameLetter {
@@ -100,6 +101,25 @@ body::-webkit-scrollbar-thumb{
 	font-size: 10vmin;
 	color: aliceblue;
 	transition: margin-top 500ms ease-out;
+}
+
+.githubInfo {
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-top: 45vmin;
+	background: #0e0e0f;
+	width: 100%;
+	height: 20vmax;
+	z-index: 1;
+}
+
+.githubCard {
+	padding: 2vmax;
+	height: 2vmax;
+	background: #0e0e0f;
+	border: 0.1vmin solid aliceblue;
+	border-radius: 6%;
 }
 
 .loading {
@@ -129,7 +149,7 @@ body::-webkit-scrollbar-thumb{
 	border: none;
 	width: 80%;
 	height: 125vmin;
-	margin-top: 8vh;
+	margin-top: 8vmin;
 }
 
 .sticky {
@@ -137,11 +157,11 @@ body::-webkit-scrollbar-thumb{
 	flex-direction: column;
 	justify-content: space-between;
 	height: 9vh;
+	padding: .5vh;
 	position: fixed;
 	cursor: pointer;
-	bottom: 1vh;
-	right: 1vw;
-	padding: .5vh;
+	bottom: 1vmax;
+	right: 1vmax;
 	border-radius: 5%;
 	background-color: aliceblue;
 }
