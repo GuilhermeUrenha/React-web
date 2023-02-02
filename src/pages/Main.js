@@ -17,7 +17,7 @@ export default function App() {
 
 	var repositories = new Map();
 	class Repository {
-		constructor(id, name, url, language, updated, visibility){
+		constructor(id, name, url, language, updated, visibility) {
 			this.id = id;
 			this.name = name;
 			this.url = url;
@@ -38,7 +38,7 @@ export default function App() {
 		if (isLoading) return '';
 		if (error) return `Something went wrong: ${error.message}`;
 
-		for (var repo of data.data){
+		for (var repo of data.data) {
 			let repository = new Repository(
 				repo.id,
 				repo.name,
@@ -47,41 +47,54 @@ export default function App() {
 				repo.updated_at,
 				repo.visibility
 			);
-			repository.getCommits(repo.commits_url.replace('{/sha}',''));
+			repository.getCommits(repo.commits_url.replace('{/sha}', ''));
 			repositories.set(repo.id, repository);
 		}
-		return [...repositories.entries()].map((r) => (<div key={r[0]} className={'githubCard'}>{r[1].name}</div>));
+		return [...repositories.entries()].map(
+			(r) => (
+				<div key={r[0]} className={'githubCard'}>
+					{r[1].name}
+					<br/>
+					{r[1].url}
+					<br/>
+					{r[1].language}
+					<br/>
+					{r[1].updated}
+					<br/>
+					{r[1].visibility}
+				</div>)
+		);
 	}
 
 	var assembleDelay = 500;
-	function nameAssemble(letter, key, extension){
+	function nameAssemble(letter, key, extension) {
 		const startingPoint = Math.floor(Math.random() * 2);
 		const topStart = 0, bottomStart = 1;
 		var startPosition;
 
-		if(startingPoint === topStart)
+		if (startingPoint === topStart)
 			startPosition = '-15vmin';
-		else if(startingPoint === bottomStart)
+		else if (startingPoint === bottomStart)
 			startPosition = '60vmin';
 		const assembleTransition = {
-			entering: { 
+			entering: {
 				marginTop: startPosition
 			},
-			entered: { 
+			entered: {
 				marginTop: '15vmin',
 				opacity: 1
 			}
 		};
-		return (<Transition in={inProp} key={key} timeout={assembleDelay+=100}>
-			{(state) =>(
+		return (<Transition in={inProp} key={key} timeout={assembleDelay += 100}>
+			{(state) => (
 				<div
-				className={`NameLetter${extension ? ' NameExtension' : ''}`}
-				style={{
-					marginTop: startPosition,
-					...assembleTransition[state]
-				}}
+					className={`NameLetter${extension ? ' NameExtension' : ''}`}
+					style={{
+						marginTop: startPosition,
+						...assembleTransition[state]
+					}}
 				>
-				{letter}
+					{letter}
 				</div>
 			)}
 		</Transition>);
@@ -96,7 +109,7 @@ export default function App() {
 				{name.map((letter, key) => nameAssemble(letter, key))}
 				{extension.map((letter, key) => nameAssemble(letter, key, true))}
 			</div>
-			<section className='githubInfo'>
+			<section id='githubInfo'>
 				<Async promiseFn={gitHub}>
 					{ActAsync}
 				</Async>

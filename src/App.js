@@ -26,7 +26,7 @@ function App() {
 	return (
 		<div className='App'>
 			<BrowserRouter>
-				<header className='App-header'>
+				<header id='App-header'>
 					<nav className='Link-routes'>
 						<ToLink to={'/'}>Home</ToLink>
 						<ToLink to={'/Resume'}>Currículo</ToLink>
