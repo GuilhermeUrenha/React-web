@@ -104,24 +104,6 @@ body::-webkit-scrollbar-thumb{
 	transition: margin-top 500ms ease-out;
 }
 
-#githubInfo {
-	display: inline-grid;
-	align-items: center;
-	justify-content: space-evenly;
-	margin-top: 45vmin;
-	background: #0e0e0f;
-	width: 100%;
-	height: 40vmax;
-}
-
-.githubCard {
-	padding: 2vmax;
-	height: fit-content;
-	background: #0e0e0f;
-	border: 0.1vmin solid aliceblue;
-	border-radius: 2%;
-}
-
 .loading {
 	color: aliceblue;
 	position: absolute;
@@ -169,4 +151,35 @@ body::-webkit-scrollbar-thumb{
 .sticky img {
 	display: list-item;
 	height: 4vh;
+}
+
+#githubInfo {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	margin-top: 45vmin;
+	background: #0e0e0f;
+	width: 100%;
+	height: 60vmax;
+}
+
+.githubCard {
+	padding: 2vmax;
+	height: 12vmax;
+	width: 30vmax;
+	margin: 5vmin;
+	background: #0e0e0f;
+	border: 0.1vmin solid gray;
+}
+
+.title a {
+	text-decoration: none;
+}
+
+.visibility {
+	font-size: 1vmax;
+	padding-inline: 1vmin;
+	width: fit-content;
+	border: gray solid 1px;
+	border-radius: 5vmax;
 }

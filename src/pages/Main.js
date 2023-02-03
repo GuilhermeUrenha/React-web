@@ -17,12 +17,12 @@ export default function App() {
 
 	var repositories = new Map();
 	class Repository {
-		constructor(id, name, url, language, updated, visibility) {
+		constructor(id, name, html_url, language, updated_at, visibility) {
 			this.id = id;
 			this.name = name;
-			this.url = url;
+			this.url = html_url;
 			this.language = language;
-			this.updated = updated;
+			this.updated = updated_at;
 			this.visibility = visibility;
 			this.commits = 0;
 		}
@@ -33,6 +33,7 @@ export default function App() {
 			return 0;
 		}
 	}
+
 	const gitHub = () => octokit.request('GET /users/GuilhermeUrenha/repos', {});
 	const ActAsync = ({ data, error, isLoading }) => {
 		if (isLoading) return '';
@@ -53,17 +54,28 @@ export default function App() {
 		return [...repositories.entries()].map(
 			(r) => (
 				<div key={r[0]} className={'githubCard'}>
-					{r[1].name}
-					<br/>
-					{r[1].url}
-					<br/>
-					{r[1].language}
-					<br/>
-					{r[1].updated}
-					<br/>
-					{r[1].visibility}
-				</div>)
+					<h1 className='title'>
+						<a href={r[1].url} target='_blank' rel='noreferrer'>{r[1].name}</a>
+					</h1>
+					<h2 className='visibility'>{r[1].visibility[0].toUpperCase() + r[1].visibility.substring(1)}</h2>
+					<p className='language'>{r[1].language}</p>
+					<time className='updated'>{daysAgo(r[1].updated)}</time>
+				</div>
+			)
 		);
+	}
+
+	function daysAgo(date) {
+		var formattedDate;
+		const today = new Date();
+		const elapsedTime = today - new Date(Date.parse(date));
+		const elapsedDays = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+		console.log(elapsedDays);
+		if (elapsedDays <= 1) formattedDate = 'Hoje';
+		else if (elapsedDays == 1) formattedDate = 'Ontem';
+		else if (elapsedDays == 2) formattedDate = 'Anteontem';
+		else if (elapsedDays > 30) formattedDate = `${Math.floor(elapsedDays % 30)} meses`;
+		return formattedDate;
 	}
 
 	var assembleDelay = 500;
