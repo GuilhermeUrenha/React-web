@@ -85,7 +85,7 @@ body::-webkit-scrollbar-thumb{
 }
 
 #Name {
-	display: flex;
+	display: inline-flex;
 	position: fixed;
 	justify-content: center;
 	background: black;
@@ -154,23 +154,22 @@ body::-webkit-scrollbar-thumb{
 }
 
 #Github {
-	display: flex;
+	display: inline-flex;
+	margin-top: 45vmin;
+    background: #0e0e0f;
+	width: 100%;
 }
 
 #githubInfo {
 	display: flex;
 	flex-wrap: wrap;
+	flex-basis: fit-content;
 	align-content: flex-start;
-	margin-top: 45vmin;
-	background: #0e0e0f;
-	width: 100%;
+	width: fit-content;
 	height: 60vmax;
 }
 
 #githubProfile {
-	background: #0e0e0f;
-	margin-top: 45vmin;
-	background: #0e0e0f;
 	width: 30vmax;
 	height: 60vmax;
 }
@@ -181,7 +180,7 @@ body::-webkit-scrollbar-thumb{
 	justify-content: space-evenly;
 	padding: 2vmin;
 	height: 5vmax;
-	width: 30vmax;
+	width: 27vmax;
 	margin: 2vmin;
 	background: #0e0e0f;
 	border: 0.1vmin solid gray;
@@ -189,17 +188,33 @@ body::-webkit-scrollbar-thumb{
 
 .row {
 	align-self: start;
-	height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	height: 50%;
+    align-items: center;
+    width: 100%;
+}
+
+.leftBundle {
+	display: flex;
+    align-items: center;
 }
 
 .title, .title a {
 	display: inline;
+    font-size: 1.8vmax;
 	text-decoration: none;
 	color: lightskyblue;
 }
 
+.title a:hover {
+	text-decoration: underline;
+}
+
 .visibility {
 	display: inline;
+	margin-inline-start: 1vmax;
 	color: gray;
 	font-size: 1vmax;
 	padding-inline: 1vmin;
@@ -211,9 +226,19 @@ body::-webkit-scrollbar-thumb{
 
 .commits {
 	display: inline;
+    font-size: 1.4vmax;
 }
 
 .language, .updated {
 	display: inline;
 	color: gray;
+    font-size: 1.2vmax;
+}
+
+.avatar {
+	border-radius: 100%;
+}
+
+.nameDiv {
+	text-align: end;
 }

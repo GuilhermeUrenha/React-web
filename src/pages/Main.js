@@ -7,7 +7,6 @@ import token from '../auth.js';
 export default function App() {
 	const [inProp, setInProp] = useState(false);
 	const [inCommits,] = useState([]);
-//	const [inCards, setInCards] = useState(false);
 	useEffect(() => {
 		setInProp(true);
 	}, []);
@@ -39,7 +38,7 @@ export default function App() {
 		if (inCommits.some(cId => cId === id)) return;
 		inCommits.push(id);
 
-		var commitsDiv = document.createElement('div');
+		var commitsDiv = card.getElementsByClassName('commits')[0]; //document.createElement('div');
 		commitsDiv.className = 'commits';
 		commitsDiv.textContent = commits.length;
 
@@ -47,13 +46,10 @@ export default function App() {
 		text.textContent = ' commits';
 		text.style.color = 'grey';
 		commitsDiv.append(text);
-
-		let visibility = card.getElementsByClassName('visibility')[0];
-		visibility.insertAdjacentElement('afterend', commitsDiv);
 	}
 
-	const gitHub = () => octokit.request('GET /users/GuilhermeUrenha/repos', {});
-	const ActAsync = ({ data, error, isLoading }) => {
+	const gitHubRepos = () => octokit.request('GET /users/GuilhermeUrenha/repos', {});
+	const RepoAsync = ({ data, error, isLoading }) => {
 		if (isLoading) return '';
 		if (error) return `Something went wrong: ${error.message}`;
 
@@ -69,14 +65,18 @@ export default function App() {
 			repository.getCommits(repo.commits_url.replace('{/sha}', ''));
 			repositories.set(repo.id, repository);
 		}
+
 		return [...repositories.entries()].map(
 			(r) => (
 				<div key={r[0]} id={r[0]} className={'githubCard'}>
 					<div className='row'>
-						<h1 className='title'>
-							<a href={r[1].url} target='_blank' rel='noreferrer'>{r[1].name}</a>
-						</h1>
-						<h2 className='visibility'>{r[1].visibility[0].toUpperCase() + r[1].visibility.substring(1)}</h2>
+						<div className='leftBundle'>
+							<h1 className='title'>
+								<a href={r[1].url} target='_blank' rel='noreferrer'>{r[1].name}</a>
+							</h1>
+							<h2 className='visibility'>{r[1].visibility[0].toUpperCase() + r[1].visibility.substring(1)}</h2>
+						</div>
+						<div className='commits' />
 					</div>
 					<div className='row'>
 						<p className='language'>{r[1].language}</p>
@@ -85,6 +85,24 @@ export default function App() {
 				</div>
 			)
 		);
+	}
+
+	const gitHubProfile = () => octokit.request('GET /user', {});
+	const ProfileAsync = ({ data, error, isLoading }) => {
+		if (isLoading) return '';
+		if (error) return `Something went wrong: ${error.message}`;
+		const profile = data.data;
+
+		return (
+			<div className='profile'>
+				<img className='avatar' src={profile.avatar_url} alt='Profile Avatar'/>
+				<div className='nameDiv'>
+					<h1 className='fullname'>{profile.name}</h1>
+					<h3 className='login'>{profile.login}</h3>
+				</div>
+				<div className='email'>{profile.email}</div>
+			</div>
+		)
 	}
 
 	function daysAgo(date) {
@@ -146,12 +164,14 @@ export default function App() {
 			</div>
 			<div id='Github'>
 				<section id='githubInfo'>
-					<Async promiseFn={gitHub}>
-						{ActAsync}
+					<Async promiseFn={gitHubRepos}>
+						{RepoAsync}
 					</Async>
 				</section>
 				<section id='githubProfile'>
-
+					<Async promiseFn={gitHubProfile}>
+						{ProfileAsync}
+					</Async>
 				</section>
 			</div>
 		</main>
