@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import Async from 'react-async';
 import { Octokit } from '@octokit/core';
@@ -7,15 +6,16 @@ import token from '../auth.js';
 
 export default function App() {
 	const [inProp, setInProp] = useState(false);
+	const [inCommits,] = useState([]);
+//	const [inCards, setInCards] = useState(false);
 	useEffect(() => {
 		setInProp(true);
 	}, []);
 
+	var repositories = new Map();
 	const octokit = new Octokit({
 		auth: token
 	});
-
-	var repositories = new Map();
 	class Repository {
 		constructor(id, name, html_url, language, updated_at, visibility) {
 			this.id = id;
@@ -29,9 +29,27 @@ export default function App() {
 		async getCommits(request) {
 			var commitsInfo = await (await fetch(request)).json().then(c => commitsInfo = c);
 			this.commits = commitsInfo;
-			//document.getElementById('commits').textContent = commitArray.size;
+			loadCommits(this.id, this.commits);
 			return 0;
 		}
+	}
+
+	function loadCommits(id, commits) {
+		const card = document.getElementById(id);
+		if (inCommits.some(cId => cId === id)) return;
+		inCommits.push(id);
+
+		var commitsDiv = document.createElement('div');
+		commitsDiv.className = 'commits';
+		commitsDiv.textContent = commits.length;
+
+		let text = document.createElement('span');
+		text.textContent = ' commits';
+		text.style.color = 'grey';
+		commitsDiv.append(text);
+
+		let visibility = card.getElementsByClassName('visibility')[0];
+		visibility.insertAdjacentElement('afterend', commitsDiv);
 	}
 
 	const gitHub = () => octokit.request('GET /users/GuilhermeUrenha/repos', {});
@@ -53,28 +71,33 @@ export default function App() {
 		}
 		return [...repositories.entries()].map(
 			(r) => (
-				<div key={r[0]} className={'githubCard'}>
-					<h1 className='title'>
-						<a href={r[1].url} target='_blank' rel='noreferrer'>{r[1].name}</a>
-					</h1>
-					<h2 className='visibility'>{r[1].visibility[0].toUpperCase() + r[1].visibility.substring(1)}</h2>
-					<p className='language'>{r[1].language}</p>
-					<time className='updated'>{daysAgo(r[1].updated)}</time>
+				<div key={r[0]} id={r[0]} className={'githubCard'}>
+					<div className='row'>
+						<h1 className='title'>
+							<a href={r[1].url} target='_blank' rel='noreferrer'>{r[1].name}</a>
+						</h1>
+						<h2 className='visibility'>{r[1].visibility[0].toUpperCase() + r[1].visibility.substring(1)}</h2>
+					</div>
+					<div className='row'>
+						<p className='language'>{r[1].language}</p>
+						<time className='updated'>{daysAgo(r[1].updated)}</time>
+					</div>
 				</div>
 			)
 		);
 	}
 
 	function daysAgo(date) {
-		var formattedDate;
+		var formattedDate = 'Atualizado ';
 		const today = new Date();
 		const elapsedTime = today - new Date(Date.parse(date));
 		const elapsedDays = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-		console.log(elapsedDays);
-		if (elapsedDays <= 1) formattedDate = 'Hoje';
-		else if (elapsedDays == 1) formattedDate = 'Ontem';
-		else if (elapsedDays == 2) formattedDate = 'Anteontem';
-		else if (elapsedDays > 30) formattedDate = `${Math.floor(elapsedDays % 30)} meses`;
+		if (elapsedDays === 0) formattedDate += 'hoje';
+		else if (elapsedDays === 1) formattedDate += 'ontem';
+		else if (elapsedDays === 2) formattedDate += 'anteontem';
+		else if (elapsedDays < 30) formattedDate += `${elapsedDays} dias atrás`;
+		else if (elapsedDays > 30) formattedDate += `${Math.floor(elapsedDays % 30)} meses atrás`;
+		else formattedDate += 'há muito tempo';
 		return formattedDate;
 	}
 
@@ -121,11 +144,16 @@ export default function App() {
 				{name.map((letter, key) => nameAssemble(letter, key))}
 				{extension.map((letter, key) => nameAssemble(letter, key, true))}
 			</div>
-			<section id='githubInfo'>
-				<Async promiseFn={gitHub}>
-					{ActAsync}
-				</Async>
-			</section>
+			<div id='Github'>
+				<section id='githubInfo'>
+					<Async promiseFn={gitHub}>
+						{ActAsync}
+					</Async>
+				</section>
+				<section id='githubProfile'>
+
+				</section>
+			</div>
 		</main>
 	);
 };

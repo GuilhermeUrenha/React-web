@@ -153,8 +153,12 @@ body::-webkit-scrollbar-thumb{
 	height: 4vh;
 }
 
+#Github {
+	display: flex;
+}
+
 #githubInfo {
-	display: inline-flex;
+	display: flex;
 	flex-wrap: wrap;
 	align-content: flex-start;
 	margin-top: 45vmin;
@@ -163,23 +167,53 @@ body::-webkit-scrollbar-thumb{
 	height: 60vmax;
 }
 
-.githubCard {
-	padding: 2vmax;
-	height: 12vmax;
+#githubProfile {
+	background: #0e0e0f;
+	margin-top: 45vmin;
+	background: #0e0e0f;
 	width: 30vmax;
-	margin: 5vmin;
+	height: 60vmax;
+}
+
+.githubCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	padding: 2vmin;
+	height: 5vmax;
+	width: 30vmax;
+	margin: 2vmin;
 	background: #0e0e0f;
 	border: 0.1vmin solid gray;
 }
 
-.title a {
+.row {
+	align-self: start;
+	height: fit-content;
+}
+
+.title, .title a {
+	display: inline;
 	text-decoration: none;
+	color: lightskyblue;
 }
 
 .visibility {
+	display: inline;
+	color: gray;
 	font-size: 1vmax;
 	padding-inline: 1vmin;
+	height: fit-content;
 	width: fit-content;
 	border: gray solid 1px;
 	border-radius: 5vmax;
+}
+
+.commits {
+	display: inline;
+}
+
+.language, .updated {
+	display: inline;
+	color: gray;
 }
