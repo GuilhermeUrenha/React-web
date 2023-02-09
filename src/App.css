@@ -161,15 +161,18 @@ body::-webkit-scrollbar-thumb{
 }
 
 #githubInfo {
+	opacity: 0;
+	transition: opacity 300ms;
 	display: flex;
 	flex-wrap: wrap;
-	flex-basis: fit-content;
 	align-content: flex-start;
 	width: fit-content;
 	height: 60vmax;
 }
 
 #githubProfile {
+	opacity: 0;
+	transition: opacity marginLeft 400ms;
 	width: 30vmax;
 	height: 60vmax;
 }
@@ -235,8 +238,13 @@ body::-webkit-scrollbar-thumb{
     font-size: 1.2vmax;
 }
 
+.profile {
+	padding: 6vmin;
+}
+
 .avatar {
 	border-radius: 100%;
+    width: -webkit-fill-available;
 }
 
 .nameDiv {

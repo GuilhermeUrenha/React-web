@@ -7,8 +7,10 @@ import token from '../auth.js';
 export default function App() {
 	const [inProp, setInProp] = useState(false);
 	const [inCommits,] = useState([]);
+	const [inCards, setInCards] = useState(false);
 	useEffect(() => {
 		setInProp(true);
+		setInCards(true);
 	}, []);
 
 	var repositories = new Map();
@@ -95,7 +97,7 @@ export default function App() {
 
 		return (
 			<div className='profile'>
-				<img className='avatar' src={profile.avatar_url} alt='Profile Avatar'/>
+				<img className='avatar' src={profile.avatar_url} alt='Profile Avatar' />
 				<div className='nameDiv'>
 					<h1 className='fullname'>{profile.name}</h1>
 					<h3 className='login'>{profile.login}</h3>
@@ -153,8 +155,17 @@ export default function App() {
 		</Transition>);
 	}
 
-	var name = ['G', 'U', 'I', 'L', 'H', 'E', 'R', 'M', 'E'];
-	var extension = ['.', 'r', 'a', 'r'];
+	const name = ['G', 'U', 'I', 'L', 'H', 'E', 'R', 'M', 'E'];
+	const extension = ['.', 'r', 'a', 'r'];
+	const cardOpacity = {
+		entering: {
+			opacity: 0,
+			marginLeft: '-1vmin'
+		},
+		entered: {
+			opacity: 1
+		}
+	}
 
 	return (
 		<main>
@@ -163,16 +174,24 @@ export default function App() {
 				{extension.map((letter, key) => nameAssemble(letter, key, true))}
 			</div>
 			<div id='Github'>
-				<section id='githubInfo'>
-					<Async promiseFn={gitHubRepos}>
-						{RepoAsync}
-					</Async>
-				</section>
-				<section id='githubProfile'>
-					<Async promiseFn={gitHubProfile}>
-						{ProfileAsync}
-					</Async>
-				</section>
+				<Transition in={inCards} timeout={500}>
+					{(state) => (
+						<section id='githubInfo' style={{ ...cardOpacity[state] }}>
+							<Async promiseFn={gitHubRepos}>
+								{RepoAsync}
+							</Async>
+						</section>
+					)}
+				</Transition>
+				<Transition in={inCards} timeout={300}>
+					{(state) => (
+						<section id='githubProfile' style={{ ...cardOpacity[state] }}>
+							<Async promiseFn={gitHubProfile}>
+								{ProfileAsync}
+							</Async>
+						</section>
+					)}
+				</Transition>
 			</div>
 		</main>
 	);
